@@ -5,6 +5,7 @@
     <meta name="description" content="UTF (UTF-8) Unicode to HTML entity">
     <meta name="author" content="Ahmed Bahet">
     <title>UTF Unicode to HTML entity</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
@@ -19,16 +20,23 @@
       </div>
       <div class="row marketing">
         <form name="form">
-            <div class="col-lg-12 well">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
                     <textarea class="form-control" rows="5" name="utfInput"></textarea>
             </div>
-            <div class="row col-lg-12 text-center" style="margin-bottom:15px;">
+            <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-bottom:15px;">
                 <button type="button" class="btn btn-primary" onclick="convert()" style="display: inline-block; width:150px;">
-                    <span class="glyphicon glyphicon-repeat"></span>   Convert &nbsp
-                </button>
+                    <span class="glyphicon glyphicon-repeat"></span>   Convert
             </div>
-            <div class="col-lg-12 well">
-                <textarea class="form-control" rows="5"  name="entityOutput" disabled></textarea>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+                <textarea class="form-control" rows="5" id="entityOutput" name="entityOutput" disabled></textarea>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                   <button type="button" class="btn btn-success btn-sm"  onclick="copyToClipboard('#entityOutput')">Copy To Clipboard...</button>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                   <button type="button" class="btn btn-danger btn-sm" onclick="clearText();" >Clear Text Area</button>
+              </div>
             </div>
         </form>
       </div>
@@ -53,6 +61,19 @@
             }
           }
           document.form.entityOutput.value = entityTxt;
+        }
+
+        function copyToClipboard(element) {
+          var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val($(element).val()).select();
+          document.execCommand("copy");
+          $temp.remove();
+        }
+
+        function clearText(){
+          document.form.utfInput.value = '';
+          document.form.entityOutput.value = '';
         }
     </script>
   </body>
