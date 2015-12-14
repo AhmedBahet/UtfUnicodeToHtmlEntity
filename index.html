@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="UTF (UTF-8) Unicode to HTML entity">
+    <meta name="author" content="Ahmed Bahet">
+    <title>UTF Unicode to HTML entity</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="//getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">UTF (UTF-8) Unicode to HTML entity</h3>
+      </div>
+      <div class="row marketing">
+        <form name="form">
+            <div class="col-lg-12 well">
+                    <textarea class="form-control" rows="5" name="utfInput"></textarea>
+            </div>
+            <div class="row col-lg-12 center">
+                <button type="button" class="btn btn-primary" onclick="toEntity()">
+                    <span class="glyphicon glyphicon-fast-forward"></span>   Convert &nbsp
+                </button>
+            </div>
+            <div class="col-lg-12 well">
+                <textarea class="form-control" rows="5"  name="entityOutput" disabled></textarea>
+            </div>
+        </form>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Abahet</p>
+      </footer>
+    </div> <!-- /container -->
+    <script type="text/javascript">
+        function toEntity() {
+          var utfTxt = document.form.utfInput.value;
+          var entityTxt = '';
+          for(i=0; i<utfTxt.length; i++)
+          {
+            if(utfTxt.charCodeAt(i)>127)
+            {
+              entityTxt += '&#' + utfTxt.charCodeAt(i) + ';';
+            }
+            else
+            {
+              entityTxt += utfTxt.charAt(i);
+            }
+          }
+          document.form.entityOutput.value = entityTxt;
+        }
+    </script>
+  </body>
+</html>
+<td>
