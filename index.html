@@ -52,7 +52,7 @@
           var toEscape = ["37", ];
           for(i=0; i<utfTxt.length; i++)
           {
-            if(utfTxt.charCodeAt(i)>127 || toEscape.indexOf(utfTxt.charCodeAt(i)))
+            if(utfTxt.charCodeAt(i)>127 || toEscape.indexOf(utfTxt.charCodeAt(i)) != -1 )
             {
               entityTxt += '&#' + utfTxt.charCodeAt(i) + ';';
             }
