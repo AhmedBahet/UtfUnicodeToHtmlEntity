@@ -49,9 +49,10 @@
         function convert() {
           var utfTxt = document.form.utfInput.value;
           var entityTxt = '';
+          var toEscape = ["37", ];
           for(i=0; i<utfTxt.length; i++)
           {
-            if(utfTxt.charCodeAt(i)>127)
+            if(utfTxt.charCodeAt(i)>127 || toEscape.indexOf(utfTxt.charCodeAt(i)))
             {
               entityTxt += '&#' + utfTxt.charCodeAt(i) + ';';
             }
