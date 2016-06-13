@@ -33,10 +33,10 @@
               </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
-                <textarea class="form-control" rows="5" id="entityOutput" name="entityOutput" disabled></textarea>
+                <textarea class="form-control" rows="5" id="entityOutput" name="entityOutput"></textarea>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-               <button type="button" class="btn btn-success btn-sm"  onclick="copyToClipboard('#entityOutput')">Copy To Clipboard...</button>
+               <button type="button" class="btn btn-success btn-sm"  id="btnCopyText" data-copytarget="#entityOutput">Copy To Clipboard...</button>
             </div>
         </form>
       </div>
@@ -63,19 +63,44 @@
           }
           document.form.entityOutput.value = entityTxt;
         }
-
-        function copyToClipboard(element) {
-          var $temp = $("<input>");
-          $("body").append($temp);
-          $temp.val($(element).val()).select();
-          document.execCommand("copy");
-          $temp.remove();
-        }
-
         function clearText(){
           document.form.utfInput.value = '';
           document.form.entityOutput.value = '';
         }
+        //  Copy text from any appropriate field to the clipboard
+        function copyToClipBoard(e) {
+            // find target element
+            var
+              t = e.target,
+              c = t.dataset.copytarget,
+              inp = (c ? document.querySelector(c) : null);
+
+            // is element selectable?
+            if (inp && inp.select) {
+
+              // select text
+              inp.select();
+
+              try {
+                // copy text
+                document.execCommand('copy');
+                inp.blur();
+
+                // copied animation
+                t.classList.add('copied');
+                setTimeout(function() { t.classList.remove('copied'); }, 1500);
+              }
+              catch (err) {
+                alert('please press Ctrl/Cmd+C to copy');
+              }
+            }
+        }
+        $(document).ready(function() {
+            $("#btnCopyText").click(function(e) {
+                // event handler
+                copyToClipBoard(e);
+            });
+        });
     </script>
   </body>
 </html>
